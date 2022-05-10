@@ -107,6 +107,14 @@ function App() {
     getActionList()
   }
 
+  const onActionDeletionFromFifo = (actionId : number, index : number)=>{
+    axios.delete(`${process.env.REACT_APP_BACKEND_URL}/action-list/${actionId}/${index}`)
+    .then((response)=>{
+      getActionList()
+    })
+    .catch((error : AxiosError)=> setErrorMsg(error.message))
+  }
+
   const onAddToActionList = (actionToAdd: Action)=>{
     if(actionList){
       axios.post(`${process.env.REACT_APP_BACKEND_URL}/action-list/addAction/${actionToAdd.id}`)
@@ -154,7 +162,7 @@ function App() {
           {
             actionList&&
             <Box marginTop="30px" marginBottom='20px'>
-              <Fifo actionList={actionList}></Fifo>
+              <Fifo actionList={actionList} onActionDeletionFromFifo={onActionDeletionFromFifo}></Fifo>
             </Box>
           }
 

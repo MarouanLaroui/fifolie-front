@@ -4,8 +4,12 @@ import React from "react";
 import ActionList from "../models/ActionList";
 import ActionCard from "./ActionCard";
 import './Fifo.css'
-export default function Fifo(props:{actionList : ActionList}){
-  const {actionList} = props;
+export default function Fifo(
+  props:{
+    actionList : ActionList,
+    onActionDeletionFromFifo(id: number,index: number):void
+  }){
+  const {actionList,onActionDeletionFromFifo} = props;
   return (
     <Grid 
       container 
@@ -40,7 +44,7 @@ export default function Fifo(props:{actionList : ActionList}){
         actionList.actions.map((action,index)=>{
         return (
           <Box padding='8px'  key={`${action.id}i${index}`}>
-            <ActionCard action={action}></ActionCard>
+            <ActionCard action={action} index={index} onActionDeletionFromFifo={onActionDeletionFromFifo}></ActionCard>
           </Box>
           )
         })

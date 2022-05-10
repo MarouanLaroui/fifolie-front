@@ -82,16 +82,16 @@ export default function ActionRow(
           <Grid item xs="auto">
           <Tooltip title="Ajouter à la fifo">
             <IconButton 
-                aria-label="upload picture" 
+                aria-label="add to fifo" 
                 onClick={()=>onAddToActionList(action)}
                 sx={{color:'white'}}
                 >
-              <AddBoxIcon fontSize="large"/> 
+              <AddBoxIcon /> 
             </IconButton>
           </Tooltip>
          
             <Tooltip title="Modifier">
-              <IconButton aria-label="delete" onClick={(event) => {
+              <IconButton aria-label="update" onClick={(event) => {
                 onUpdateClick(action)}
                 } sx={{color:'white'}}>
                 <EditIcon />
@@ -102,7 +102,7 @@ export default function ActionRow(
           <Grid item xs="auto">
             <Tooltip title="Supprimer">
               <IconButton 
-                aria-label="modify" 
+                aria-label="delete" 
                 onClick={(event)=>{
 
                   onDeletionClick()}
