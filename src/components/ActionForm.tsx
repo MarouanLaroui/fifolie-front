@@ -54,7 +54,11 @@ export default function ActionForm(props:{
 
       axiosAction
       .then((response)=>{
-        onSubmit(response.data)
+        onSubmit(
+          action?
+          {id: action.id,...data}
+          :response.data
+          )
         setSuccessMsg(action?
           "Action modifiee avec succes !"
           :"Action creee avec succes !")

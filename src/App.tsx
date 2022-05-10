@@ -74,12 +74,14 @@ function App() {
 
   const onActionUpdate = (updatedAction : Action)=>{
     setActions(
-      actions.map((action)=>{
-        if(action.id === updatedAction.id){
-          return updatedAction;
-        }
-        return action;
-      })
+      [
+        ...actions.map((action)=>{
+      if(action.id === updatedAction.id){
+        return updatedAction;
+      }
+      return action;
+    })]
+      
     );
     getActionList()
   }
@@ -165,9 +167,7 @@ function App() {
           justifyContent='center'
           >
 
-            <Grid item xs={10} md={6}>
-                <ActionForm action={selectedAction} onSubmit={selectedAction? onActionUpdate : onActionCreation}/>
-            </Grid>
+            
 
             <Grid item  xs={10} md={6}>
                 <ActionSearchableList 
@@ -177,6 +177,10 @@ function App() {
                   onUpdateClick={onActionUpdateClick}
                   onDeleteClick={onActionDeletion}
                 />
+            </Grid>
+
+            <Grid item xs={10} md={6}>
+                <ActionForm action={selectedAction} onSubmit={selectedAction? onActionUpdate : onActionCreation}/>
             </Grid>
 
           </Grid>

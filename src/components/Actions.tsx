@@ -8,10 +8,11 @@ export default function Actions(props :
   {
     actions : Action[],
     onAddToActionList(action: Action):void
+    onCreateClick():void,
     onUpdateClick(action: Action):void,
     onDeleteClick(action : Action):void,
   }){
-  const {actions,onAddToActionList,onUpdateClick,onDeleteClick} = props;
+  const {actions,onAddToActionList, onCreateClick, onUpdateClick,onDeleteClick} = props;
   return (
     <Stack direction='column' width='100%'>
       <ActionRowLegend></ActionRowLegend>
@@ -20,7 +21,7 @@ export default function Actions(props :
           actions.map((action,index)=>{
             return (
             <React.Fragment key={action.id}>
-            <ActionRow action={action} onDeleteClick={onDeleteClick} onUpdateClick={onUpdateClick} onAddToActionList={onAddToActionList}/>
+            <ActionRow action={action}  onDeleteClick={onDeleteClick} onUpdateClick={onUpdateClick} onAddToActionList={onAddToActionList}/>
             <Divider sx={{bgcolor:'gray'}}/>
             </React.Fragment>
             )

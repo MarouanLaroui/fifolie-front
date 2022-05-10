@@ -62,6 +62,7 @@ export default function ActionSearchableList(props :
       <Actions 
         actions={filteredActionList} 
         onAddToActionList={onAddToActionList} 
+        onCreateClick={onCreateClick}
         onUpdateClick={onUpdateClick} 
         onDeleteClick={onDeleteClick}
       />

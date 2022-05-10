@@ -1,20 +1,21 @@
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, IconButton, Tooltip, Typography } from "@mui/material";
 import React, { useState } from "react";
 import Action from "../models/Action";
 import { DeleteForeverRounded } from '@mui/icons-material';
 import EditIcon from '@mui/icons-material/Edit';
 import axios, { AxiosError } from "axios";
 import useMessageContext from "../hooks/useMessageContext";
+import AddBoxIcon from '@mui/icons-material/AddBox';
 
 export default function ActionRow(
   props : {
     action : Action,
-    onAddToActionList(action: Action):void
+    onAddToActionList(action: Action):void,
     onUpdateClick(action : Action):void,
     onDeleteClick(action : Action):void,
   }){
 
-  const {action, onUpdateClick, onDeleteClick, onAddToActionList} = props;
+  const {action,onUpdateClick, onDeleteClick, onAddToActionList} = props;
   const {setErrorMsg, setSuccessMsg} = useMessageContext()
   const [dialogMsg, setDialogMsg] = useState("")
   
@@ -46,6 +47,7 @@ export default function ActionRow(
                 <DialogContentText>Cette action est irreversible.</DialogContentText>
             </DialogContent>
             <DialogActions sx={{ justifyContent: 'center', paddingBottom: '15px' }}>
+              
               <Button variant="contained" onClick={onDeletion} autoFocus>
                   Supprimer
                 </Button>
@@ -55,11 +57,7 @@ export default function ActionRow(
             </DialogActions>
           </Dialog>
       }
-    <Tooltip 
-      onClick={(event)=> {
-        event.stopPropagation()
-        onAddToActionList(action)}}
-      title={"Ajouter a la FIFO"}
+    <Box 
       sx={{
         '&:active': { backgroundColor: 'rgba(100, 100, 100, 0.12)' },
         '&:hover': {
@@ -82,9 +80,18 @@ export default function ActionRow(
           </Grid>
 
           <Grid item xs="auto">
+          <Tooltip title="Ajouter à la fifo">
+            <IconButton 
+                aria-label="upload picture" 
+                onClick={()=>onAddToActionList(action)}
+                sx={{color:'white'}}
+                >
+              <AddBoxIcon fontSize="large"/> 
+            </IconButton>
+          </Tooltip>
+         
             <Tooltip title="Modifier">
               <IconButton aria-label="delete" onClick={(event) => {
-                event.stopPropagation()
                 onUpdateClick(action)}
                 } sx={{color:'white'}}>
                 <EditIcon />
@@ -97,7 +104,7 @@ export default function ActionRow(
               <IconButton 
                 aria-label="modify" 
                 onClick={(event)=>{
-                  event.stopPropagation()
+
                   onDeletionClick()}
                 } sx={{color:'white'}}>
                 <DeleteForeverRounded />
@@ -105,7 +112,7 @@ export default function ActionRow(
             </Tooltip>
           </Grid>
         </Grid>
-      </Tooltip>
+      </Box>
     </>
   )
 }
