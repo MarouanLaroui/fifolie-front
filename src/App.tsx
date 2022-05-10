@@ -81,6 +81,7 @@ function App() {
         return action;
       })
     );
+    getActionList()
   }
 
   const onCreateClick = ()=>{
